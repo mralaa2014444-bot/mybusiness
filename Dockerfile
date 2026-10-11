@@ -7,4 +7,4 @@ ENV APP_DEBUG=false
 ENV LOG_CHANNEL=stderr
 ENV WEBROOT=/var/www/html/public
 
-CMD ["/start.sh"]
+CMD php artisan migrate --force && /start.sh
