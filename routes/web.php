@@ -21,6 +21,9 @@ use Carbon\Carbon;
 | الصفحة الرئيسية
 |--------------------------------------------------------------------------
 */
+Route::get('/test-laravel', function () {
+    return 'Laravel works!';
+});
 
 Route::get('/', function () {
 
