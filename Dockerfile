@@ -1,8 +1,10 @@
 FROM php:8.2-cli
 
-# Install system dependencies
+# Install system dependencies + CA certificates
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
+    ca-certificates openssl \
+    && update-ca-certificates \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -22,6 +24,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 ENV APP_ENV=production
 ENV APP_DEBUG=true
 ENV LOG_CHANNEL=stderr
+ENV MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt
 
 # Expose port
 EXPOSE 8000
